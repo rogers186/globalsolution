@@ -8,6 +8,7 @@ paises = []
 cidades = []
 bairros = []
 ruas = []
+
 total_afetados = []
 criancas = []
 adultos = []
@@ -15,29 +16,66 @@ idosos = []
 mobilidade_reduzida = []
 feridos = []
 
-quantidade_desastres = int(input("Quantos desastres foram registrados?: "))
+#EXERCICIO 1A
+qtd_desastres = int(input("Insira a quantidade de desastres: "))
 
-for i in range(quantidade_desastres):
-    print(f"\n--- Cadastro do desastre {i+1} ---")
-
-    tipo = input("Qual desastre ocorreu(ex: incêndio, enchente, etc.)?: ")
-    pais = input("Em que país ocorreu?: ")
-    cidade = input("Em que cidade ocorreu?: ")
-    bairro = input("Em que bairro ocorreu?: ")
-    rua = input("Em que rua ocorreu?: ")
+#EXERCICIO 1B e 2
+for i in range(qtd_desastres):
+    print(f"\n--- Desastre {i + 1} ---")
+    tipos_desastres.append(input("Tipo de desastre: "))
+    paises.append(input("País: "))
+    cidades.append(input("Cidade: "))
+    bairros.append(input("Bairro: "))
+    ruas.append(input("Rua: "))
 
     while True:
-        total = int(input("Quantas pessoas foram afetadas?: "))
-        qtd_criancas = int(input("Quantas crianças (0-18 anos) foram afetadas?: "))
-        qtd_adultos = int(input("Quantos adultos (18-60 anos) foram afetados?: "))
-        qtd_idosos = int(input("Quantos idosos (60+ anos) foram afetados?: "))
-        qtd_mobilidade = int(input("Quantas pessoas com mobilidade reduzida foram afetadas?: "))
-        qtd_feridos = int(input("Quantas pessoas se feriram?: "))
-
-        soma = qtd_criancas + qtd_adultos + qtd_idosos
-
-        if soma == total:
+        total = int(input("Total de pessoas afetadas: "))
+        c = int(input("Número de crianças (0-18 anos): "))
+        a = int(input("Número de adultos (18-60 anos): "))
+        i = int(input("Número de idosos (60+ anos): "))
+        m = int(input("Número de pessoas com mobilidade reduzida: "))
+        f = int(input("Número de feridos: "))
+        if c + a + i + m + f == total:
+            total_afetados.append(total)
+            criancas.append(c)
+            adultos.append(a)
+            idosos.append(i)
+            mobilidade_reduzida.append(m)
+            feridos.append(f)
             break
         else:
-            print("A soma das categorias não corresponde ao total de pessoas afetadas.")
-            print("Por favor, insira os dados novamente.\n")
+            print("A soma das categorias não corresponde ao total de pessoas afetadas. Tente novamente.")
+
+#EXERCICIO 3A
+print(f"Total de desastres registrados: {qtd_desastres}")
+
+#EXERCICIO 3B
+total_geral = sum(total_afetados)
+print(f"Total geral de pessoas afetadas: {total_geral}")
+
+#EXERCICIO 3C
+total_criancas = sum(criancas)
+total_adultos = sum(adultos)
+total_idosos = sum(idosos)
+total_mobilidade = sum(mobilidade_reduzida)
+total_feridos = sum(feridos)
+
+print("Resumo de pessoas afetadas por categoria:")
+print(f"Crianças: {total_criancas} | Adultos: {total_adultos} | Idosos: {total_idosos} | Mobilidade reduzida: {total_mobilidade} | Feridos: {total_feridos}")
+
+#EXERCICIO 3D
+categorias = ["Crianças", "Adultos", "Idosos", "Mobilidade reduzida", "Feridos"]
+valores = [total_criancas, total_adultos, total_idosos, total_mobilidade, total_feridos]
+indice_mais_afetada = valores.index(max(valores))
+print(f"Categoria mais afetada: {categorias[indice_mais_afetada]}")
+
+#EXERCICIO 3E
+indice_mais_afetado = total_afetados.index(max(total_afetados))
+print("Desastre com maior número de afetados")
+print(f"Tipo: {tipos_desastres[indice_mais_afetado]}")
+print(f"Local: {ruas[indice_mais_afetado]}, {bairros[indice_mais_afetado]}, {cidades[indice_mais_afetado]}, {paises[indice_mais_afetado]}")
+
+
+
+
+
